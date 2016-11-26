@@ -1,0 +1,35 @@
+###   Find how many pairs in a list are equal to the given sum   ###
+
+list = [1,2,2,3,3,3,4,6]
+sum = 4
+list.sort()
+leftP = 0
+rightP = len(list)-1
+pairs = 0
+leftCount = rightCount = 0
+while (leftP < rightP):
+    total = list[leftP] + list[rightP]
+
+    if total < sum:
+        leftP += 1
+
+    elif total > sum:
+        rightP -= 1
+
+    else:
+        if list[leftP] == list[leftP+1]:
+            leftP +=1
+            leftCount += 1
+        elif list[rightP] == list[rightP-1]:
+            rightP -= 1
+            rightCount += 1
+        else:
+            leftP += 1
+            rightP -= 1
+            pairs += (leftCount+1) * (rightCount+1)
+            leftCount = rightCount = 0
+
+for i in range(leftCount):
+    pairs += (i+1)
+
+print(pairs)
