@@ -1,0 +1,30 @@
+def solution(item):
+    splitedIPv4 = item.split('.')
+    splitedIPv6 = item.split(':')
+    if len(splitedIPv4) == 4:
+        for section in splitedIPv4:
+            try:
+                section = int(section)
+                if section > 255 or section < 0:
+                    return "neither"
+            except:
+                return "neither"
+        return "IPv4"
+    elif len(splitedIPv6) == 8:
+        for section in splitedIPv6:
+            try:
+                section = int(section,16)
+                if section > int("ffff",16) or section < 0:
+                    return "neither"
+            except:
+                return "neither"
+        return "IPv6"
+    else:
+        return "neither"
+
+
+
+list = ['123:123:123:123:fff:fff:123:123','0.0.0.0','123:123:123:123','0.0.0.0.0.0','hello']
+for item in list:
+    a = solution(item)
+    print(a)
